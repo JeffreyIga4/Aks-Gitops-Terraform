@@ -1,0 +1,29 @@
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+.terraform.lock.hcl
+crash.log
+
+# Terraform override files
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.ssh/key
+
+# Node
+node_modules/
+npm-debug.log*
+
+# Azure Functions
+local.settings.json
+bin/
+obj/
+*.PublishSettings
+
+# OS
+.DS_Store
+
+kubeconfig
+*.kubeconfig 
