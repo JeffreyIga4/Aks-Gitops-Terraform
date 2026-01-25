@@ -1,29 +1,54 @@
+# Azure Functions
+local.settings.json
+obj/
+*.PublishSettings
+
+kubeconfig
+*.kubeconfig 
+
 # Terraform
-.terraform/
 *.tfstate
 *.tfstate.*
+*.tfplan
+.terraform/
 .terraform.lock.hcl
-crash.log
 
-# Terraform override files
 override.tf
 override.tf.json
 *_override.tf
 *_override.tf.json
 .ssh/key
 
+# Backend configuration files (contains sensitive storage account info)
+backend.tf
+*/backend.tf
+
+# Backup files
+*.backup
+
+# Binaries
+bin/
+*/bin/
+kubelogin*
+
+# IDE and OS files
+.vscode/
+.idea/
+.DS_Store
+thumbs.db
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+
+# Sensitive files
+secrets/
+*.pem
+*.key
+!*.tf
+
 # Node
 node_modules/
 npm-debug.log*
-
-# Azure Functions
-local.settings.json
-bin/
-obj/
-*.PublishSettings
-
-# OS
-.DS_Store
-
-kubeconfig
-*.kubeconfig 
