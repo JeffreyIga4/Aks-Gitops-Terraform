@@ -11,7 +11,6 @@ locals {
   # Key Vault name with proper length restrictions (3-24 chars)
   key_vault_name = "kv-${substr(var.environment, 0, 3)}-${random_string.suffix.result}"
 
-  # Use a deterministic node resource group name
   # This prevents circular dependencies
   infra_nodes_rg_name = "${var.kubernetes_cluster_name}-${var.environment}-nodes"
 }

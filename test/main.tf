@@ -32,23 +32,12 @@ resource "azurerm_resource_group" "main" {
 
 }
 
-# Log Analytics Workspace for production monitoring
-resource "azurerm_log_analytics_workspace" "main" {
-  name                = "${var.kubernetes_cluster_name}-${var.environment}-logs"
-  location            = azurerm_resource_group.main.location
-  resource_group_name = azurerm_resource_group.main.name
-  sku                 = "PerGB2018"
-  retention_in_days   = 90 # Extended retention for production
-  tags                = local.common_tags
-}
-
-# AKS cluster with production-grade configuration
+# AKS cluster with improved configuration
 resource "azurerm_kubernetes_cluster" "main" {
   name                = "${var.kubernetes_cluster_name}-${var.environment}"
   location            = var.location
   resource_group_name = azurerm_resource_group.main.name
   dns_prefix          = "${var.kubernetes_cluster_name}-${var.environment}"
-
 
   node_resource_group = local.infra_nodes_rg_name
   kubernetes_version  = var.kubernetes_version
@@ -62,14 +51,14 @@ resource "azurerm_kubernetes_cluster" "main" {
 
   default_node_pool {
     name                        = "default"
-    os_disk_size_gb             = 100 # Larger disk for production
+    os_disk_size_gb             = 50 # Increased for test environment
     vm_size                     = var.vm_size
     temporary_name_for_rotation = "tmpdefault"
 
-    # Enable auto-scaling for production reliability
+    # Enable auto-scaling for better reliability
     auto_scaling_enabled = true
-    min_count            = 3  # Higher minimum for production
-    max_count            = 10 # Higher maximum for production
+    min_count            = 2 # Higher minimum for test
+    max_count            = 8 # Higher maximum for test
   }
 
   # Conditional SSH key configuration
@@ -94,11 +83,6 @@ resource "azurerm_kubernetes_cluster" "main" {
 
   # Enable local accounts for admin access (required for Terraform automation)
   local_account_disabled = false
-
-  # Enable monitoring for production
-  oms_agent {
-    log_analytics_workspace_id = azurerm_log_analytics_workspace.main.id
-  }
 
   key_vault_secrets_provider {
     secret_rotation_enabled = true
