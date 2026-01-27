@@ -28,7 +28,7 @@ spec:
       serviceAccountName: default
       containers:
         - name: backend
-          image: JeffreyIga4/backend # Tag managed by kustomization.yaml
+          image: itsbaivab/backend # Tag managed by kustomization.yaml
           ports:
             - containerPort: 8080
           env:
