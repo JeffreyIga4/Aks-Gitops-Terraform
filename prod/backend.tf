@@ -5,5 +5,6 @@ terraform {
     container_name       = "tfstate"
     key                  = "prod/terraform.tfstate"
     use_azuread_auth     = false
+    use_msi              = true
   }
 }

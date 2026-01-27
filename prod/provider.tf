@@ -37,6 +37,7 @@ provider "azurerm" {
       roll_instances_when_required = true
     }
   }
+  use_msi              = true
 
 }
 

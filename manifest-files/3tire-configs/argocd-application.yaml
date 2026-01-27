@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: https://github.com/JeffreyIga4/Aks-Gitops-Terraform.git
     targetRevision: HEAD
-    path: 3tire-configs
+    path: manifests-files/3tire-configs
   destination:
     server: https://kubernetes.default.svc
     namespace: 3tirewebapp-dev
