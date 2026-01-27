@@ -37,7 +37,6 @@ provider "azurerm" {
       roll_instances_when_required = true
     }
   }
-
 }
 
 # Dynamic Kubernetes provider configuration using admin credentials
